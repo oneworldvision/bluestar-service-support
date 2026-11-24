@@ -47,7 +47,7 @@
     body {
       font-family: var(--font);
       color: var(--ink);
-      background: linear-gradient(165deg, var(--bg1), var(--bg2) 60%, #CFE3F6) fixed;
+      background: radial-gradient(circle at 50% 15%, #EAF3FD 0%, #D8E9F9 50%, #C8DEF4 100%) fixed;
       padding: max(14px, env(safe-area-inset-top)) max(14px, env(safe-area-inset-right)) max(24px, env(safe-area-inset-bottom)) max(14px, env(safe-area-inset-left));
       font-size: 16px;
       line-height: 1.35
@@ -251,7 +251,9 @@
       }
 
       .act:hover,
-      .line:hover {
+      .line:hover,
+      .call:hover,
+      .email-btn:hover {
         transform: translateY(-2px)
       }
     }
@@ -443,6 +445,118 @@
       fill: var(--blue)
     }
 
+    .call.alt {
+      background: linear-gradient(145deg, #ffffff, #EAF3FC);
+      color: var(--ink);
+      box-shadow: var(--clay-sm);
+    }
+
+    .call.alt:active {
+      transform: scale(.97);
+      box-shadow: var(--inset);
+    }
+
+    .call.alt small {
+      color: var(--mut);
+      opacity: 1;
+    }
+
+    .call.alt b {
+      color: var(--blue-dk);
+    }
+
+    .call.alt .ic {
+      background: linear-gradient(145deg, #5AA8F2, #2A72C6);
+      box-shadow: 2px 3px 6px rgba(36, 104, 186, .35);
+    }
+
+    .call.alt .ic svg {
+      fill: #fff;
+    }
+
+    .email-btn {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-height: 56px;
+      padding: 8px 10px 8px 20px;
+      border-radius: 999px;
+      text-decoration: none;
+      color: var(--ink);
+      background: linear-gradient(145deg, #ffffff, #EAF3FC);
+      box-shadow: var(--clay-sm);
+      transition: transform .18s, box-shadow .18s;
+      touch-action: manipulation;
+    }
+
+    .email-btn:active {
+      transform: scale(.97);
+      box-shadow: var(--inset);
+    }
+
+    .email-btn .t {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .email-btn small {
+      display: block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      color: var(--mut);
+      text-transform: uppercase;
+      opacity: .95;
+    }
+
+    .email-btn b {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--blue-dk);
+      letter-spacing: -.01em;
+      line-height: 1.25;
+      word-break: break-all;
+      overflow-wrap: anywhere;
+    }
+
+    .email-btn .ic {
+      flex: none;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #5AA8F2, #2A72C6);
+      box-shadow: 2px 3px 6px rgba(36, 104, 186, .35);
+    }
+
+    .email-btn .ic svg {
+      width: 20px;
+      height: 20px;
+      fill: #fff;
+    }
+
+    .email-btn.alt {
+      background: linear-gradient(145deg, #F8FAFD, #E2EEF9);
+    }
+
+    .email-btn.alt .ic {
+      background: linear-gradient(145deg, #E6F1FB, #D0E5F9);
+      box-shadow: var(--clay-sm);
+    }
+
+    .email-btn.alt .ic svg {
+      fill: var(--blue);
+    }
+
+    .contact-sec {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
     .line {
       display: flex;
       align-items: center;
@@ -591,6 +705,10 @@
 
       .call b {
         font-size: 18px
+      }
+
+      .email-btn b {
+        font-size: 12.5px
       }
 
       .card {
@@ -1291,75 +1409,630 @@
       color: var(--mut);
       font-weight: 600;
     }
+
+    /* Back button on Results Page */
+    .btn-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      border-radius: 20px;
+      border: 0;
+      cursor: pointer;
+      font: 700 14px var(--font);
+      color: var(--blue-dk);
+      background: linear-gradient(145deg, #fff, #DDEBF9);
+      box-shadow: var(--clay-sm);
+      transition: transform .18s, box-shadow .18s, filter .18s;
+      margin-bottom: 4px;
+    }
+
+    .btn-back:hover {
+      transform: translateY(-2px);
+      filter: brightness(1.04);
+      box-shadow: var(--clay);
+    }
+
+    .btn-back svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* ═══════════════════════════════════════════════
+       LIQUID & GLOWING GLASS STYLE — FRONT PAGE ONLY
+    ═══════════════════════════════════════════════ */
+    #landingView {
+      position: relative;
+    }
+
+    /* Ambient glowing liquid aura behind the top card */
+    #landingView::before {
+      content: "";
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 380px;
+      height: 220px;
+      background: radial-gradient(ellipse at center, rgba(185, 225, 255, 0.75) 0%, rgba(215, 238, 255, 0.35) 50%, transparent 75%);
+      filter: blur(36px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .glass-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.76);
+      backdrop-filter: blur(35px) saturate(190%);
+      -webkit-backdrop-filter: blur(35px) saturate(190%);
+      border-radius: 40px;
+      border: 1.5px solid rgba(255, 255, 255, 0.95);
+      box-shadow: 0 28px 65px rgba(150, 192, 238, 0.45), 0 4px 20px rgba(175, 212, 248, 0.3), 0 0 32px rgba(220, 240, 255, 0.6), inset 0 2.5px 5px rgba(255, 255, 255, 1), inset 0 -3px 8px rgba(185, 218, 250, 0.38);
+      margin-bottom: 22px;
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    /* Luminous liquid specular highlight along the top rim */
+    .header-l0-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 10%;
+      right: 10%;
+      height: 2.5px;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 1) 30%, rgba(255, 255, 255, 1) 70%, transparent);
+      box-shadow: 0 0 16px 2px rgba(255, 255, 255, 1), 0 2px 10px rgba(175, 220, 255, 0.85);
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    /* Top shelf with glowing liquid curved wave */
+    .glass-header-shelf {
+      position: relative;
+      background: linear-gradient(180deg, #CEE5FC 0%, #DCEEFD 58%, #ECF6FE 100%);
+      border-bottom: 2.5px solid rgba(255, 255, 255, 0.95);
+      border-radius: 0 0 50% 50% / 0 0 32px 32px;
+      box-shadow: 0 10px 24px rgba(160, 202, 245, 0.45), inset 0 2.5px 5px rgba(255, 255, 255, 1), inset 0 -3px 8px rgba(185, 220, 250, 0.5);
+      padding: 26px 20px 24px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    /* Liquid glossy reflection on header shelf */
+    .glass-header-shelf::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -20%;
+      width: 140%;
+      height: 65%;
+      background: radial-gradient(ellipse at 50% 0%, rgba(255, 255, 255, 0.88) 0%, rgba(255, 255, 255, 0.25) 55%, transparent 80%);
+      pointer-events: none;
+      filter: blur(1px);
+    }
+
+    /* Floating glowing 3D logo badge */
+    .glass-logo-badge {
+      width: 152px;
+      height: 52px;
+      margin: 0 auto 12px;
+      background: linear-gradient(180deg, #ffffff 0%, #F5FAFF 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 24px rgba(140, 185, 230, 0.45), 0 0 24px rgba(255, 255, 255, 0.95), inset 0 2.5px 4px #ffffff, inset 0 -2px 4px rgba(200, 225, 250, 0.6);
+      border: 1.5px solid rgba(255, 255, 255, 1);
+      position: relative;
+      z-index: 2;
+    }
+
+    .brand-logo-img {
+      max-width: 118px;
+      max-height: 40px;
+      object-fit: contain;
+      display: block;
+    }
+
+    .glass-main-title {
+      position: relative;
+      z-index: 2;
+      font-size: 21px;
+      font-weight: 800;
+      color: #152C5B;
+      letter-spacing: -0.01em;
+      margin: 0 0 4px;
+      line-height: 1.25;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+    }
+
+    .glass-main-sub {
+      position: relative;
+      z-index: 2;
+      font-size: 13.5px;
+      font-weight: 600;
+      color: #557297;
+      margin: 0;
+    }
+
+    /* Level 0 Heading inside Card 1 */
+    .glass-l0-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px 12px;
+    }
+
+    .glass-circle-btn {
+      flex: none;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(145deg, #4AA0F4, #1E66BC);
+      box-shadow: 0 6px 15px rgba(30, 102, 188, 0.42), 0 0 12px rgba(74, 160, 244, 0.35), inset 0 2px 3px rgba(255, 255, 255, 0.7), inset 0 -2px 4px rgba(10, 50, 120, 0.4);
+      transition: transform .18s, box-shadow .18s;
+    }
+
+    .glass-circle-btn svg {
+      width: 22px;
+      height: 22px;
+      fill: #fff;
+    }
+
+    .glass-l0-titles h2 {
+      font-size: 16.5px;
+      font-weight: 800;
+      color: #152C5B;
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    .glass-l0-titles span {
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #6280A5;
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* Contact Pills inside Card 1 */
+    .glass-contact-list {
+      padding: 0 18px 22px;
+    }
+
+    .glass-pill-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-height: 60px;
+      padding: 8px 14px;
+      margin-top: 10px;
+      border-radius: 999px;
+      text-decoration: none;
+      background: linear-gradient(145deg, #ffffff, #F0F6FD);
+      box-shadow: 0 6px 16px rgba(180, 205, 235, 0.38), inset 0 2px 4px rgba(255, 255, 255, 1), inset 0 -2px 4px rgba(200, 220, 245, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      transition: transform .18s, box-shadow .18s;
+      touch-action: manipulation;
+    }
+
+    .glass-pill-item:first-of-type {
+      margin-top: 0;
+    }
+
+    .glass-pill-item:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(170, 200, 235, 0.48);
+    }
+
+    .glass-pill-item:active {
+      transform: scale(0.98);
+      box-shadow: inset 0 3px 6px rgba(160, 195, 230, 0.5);
+    }
+
+    .glass-item-info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .glass-item-info small {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      color: #6583A8;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .glass-item-info b {
+      display: block;
+      font-size: 16px;
+      font-weight: 800;
+      color: #102A54;
+      letter-spacing: .01em;
+      line-height: 1.25;
+      overflow-wrap: anywhere;
+    }
+
+    /* CARD 2: Pincode Search + Location Card */
+    .search-card {
+      padding: 22px 20px;
+    }
+
+    .glass-search-lbl {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      color: #264E86;
+      text-transform: uppercase;
+    }
+
+    .glass-search-lbl svg {
+      width: 17px;
+      height: 17px;
+      fill: #264E86;
+    }
+
+    /* Recessed Inset Stadium Capsule */
+    .glass-input-well {
+      margin: 12px 0 6px;
+      background: linear-gradient(180deg, #DFEFFD, #EDF5FE);
+      border-radius: 999px;
+      box-shadow: inset 0 4px 9px rgba(150, 190, 230, 0.6), inset 0 -2px 4px rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(255, 255, 255, 0.75);
+      padding: 3px 12px;
+      transition: box-shadow .2s;
+    }
+
+    .glass-input-well:focus-within {
+      box-shadow: inset 0 4px 9px rgba(130, 175, 225, 0.7), 0 0 0 2px rgba(75, 150, 230, 0.45);
+    }
+
+    .glass-input-well input {
+      width: 100%;
+      height: 54px;
+      background: transparent;
+      border: 0;
+      outline: none;
+      text-align: center;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 0.28em;
+      color: #153366;
+      font-family: inherit;
+    }
+
+    .glass-input-well input::placeholder {
+      color: #98B8DD;
+      letter-spacing: 0.28em;
+      opacity: 0.8;
+    }
+
+    /* Buttons Row */
+    .glass-btn-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .glass-btn-search {
+      height: 52px;
+      border-radius: 999px;
+      border: 0;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      font-family: inherit;
+      color: #fff;
+      background: linear-gradient(145deg, #4390E1, #1E64B7);
+      box-shadow: 0 8px 20px rgba(30, 100, 183, 0.42), inset 0 2px 4px rgba(255, 255, 255, 0.45), inset 0 -3px 6px rgba(10, 50, 120, 0.3);
+      transition: transform .18s, box-shadow .18s, filter .18s;
+      touch-action: manipulation;
+    }
+
+    .glass-btn-search:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(30, 100, 183, 0.5);
+      filter: brightness(1.03);
+    }
+
+    .glass-btn-search:active {
+      transform: scale(0.97);
+      box-shadow: inset 0 4px 8px rgba(10, 50, 120, 0.45);
+    }
+
+    .glass-btn-search svg {
+      width: 18px;
+      height: 18px;
+      fill: #fff;
+    }
+
+    .glass-btn-reset {
+      height: 52px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 16px;
+      font-weight: 800;
+      font-family: inherit;
+      color: #264E86;
+      background: linear-gradient(145deg, #ffffff, #EDF5FE);
+      box-shadow: 0 6px 16px rgba(180, 205, 235, 0.35), inset 0 2px 4px rgba(255, 255, 255, 1), inset 0 -2px 4px rgba(200, 220, 245, 0.4);
+      transition: transform .18s, box-shadow .18s;
+      touch-action: manipulation;
+    }
+
+    .glass-btn-reset:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(170, 200, 235, 0.45);
+    }
+
+    .glass-btn-reset:active {
+      transform: scale(0.97);
+      box-shadow: inset 0 3px 6px rgba(160, 195, 230, 0.5);
+    }
+
+    .glass-btn-reset svg {
+      width: 18px;
+      height: 18px;
+      fill: #264E86;
+    }
+
+    /* Recessed Inset Stadium Location Pill */
+    .glass-loc-well {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 18px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #E6F1FC, #F2F8FE);
+      box-shadow: inset 0 3px 6px rgba(160, 195, 230, 0.45), inset 0 -1px 3px rgba(255, 255, 255, 0.9);
+      border: 1px solid rgba(255, 255, 255, 0.7);
+    }
+
+    .glass-loc-well svg {
+      width: 22px;
+      height: 22px;
+      fill: #236ABE;
+      flex: none;
+    }
+
+    .glass-loc-well small {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      color: #6B85A8;
+      text-transform: uppercase;
+      line-height: 1.2;
+    }
+
+    .glass-loc-well b {
+      display: block;
+      font-size: 15px;
+      font-weight: 800;
+      color: #122C54;
+      line-height: 1.25;
+    }
+
+    /* Sparkle icon at bottom-right of landing view */
+    .front-sparkle {
+      position: absolute;
+      right: 14px;
+      bottom: -6px;
+      font-size: 28px;
+      color: rgba(255, 255, 255, 0.92);
+      text-shadow: 0 0 12px rgba(140, 195, 255, 0.85);
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @media (max-width: 480px) {
+      .glass-card {
+        border-radius: 32px;
+      }
+      .glass-header-shelf {
+        border-radius: 0 0 46% 46% / 0 0 22px 22px;
+        padding: 20px 16px 18px;
+      }
+      .glass-main-title {
+        font-size: 18.5px;
+      }
+      .glass-input-well input {
+        font-size: 25px;
+        letter-spacing: 0.22em;
+      }
+      .glass-btn-search, .glass-btn-reset {
+        font-size: 15px;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
-    <header class="hero">
-      <div class="logo-wrap">
-        <img src="images.png" alt="Blue Star" class="brand-logo">
-      </div>
-      <h1>BLUE STAR SERVICE SUPPORT</h1>
-      <p>Escalation Matrix · Coimbatore Branch</p>
-    </header>
-
-    <section class="card rise" style="--i:1">
-      <label class="lbl" for="pin"><svg viewBox="0 0 24 24">
-          <path
-            d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z" />
-        </svg>ENTER PINCODE</label>
-      <input id="pin" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off"
-        placeholder="000000" aria-describedby="hint">
-      <p id="hint" class="hint" role="status" aria-live="polite"></p>
-      <div class="btns">
-        <button id="go" class="btn pri" type="button"><svg viewBox="0 0 24 24">
-            <path
-              d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z" />
-          </svg>Search</button>
-        <button id="reset" class="btn sec" type="button"><svg viewBox="0 0 24 24">
-            <path d="M12 5V2L7 6.5 12 11V8a5 5 0 1 1-5 5H5a7 7 0 1 0 7-8z" />
-          </svg>Reset</button>
-      </div>
-      <div class="loc"><svg viewBox="0 0 24 24">
-          <path
-            d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z" />
-        </svg>
-        <div><small>LOCATION</small><b id="loc">—</b></div>
-      </div>
-    </section>
-
-    <section class="card rise" style="--i:2">
-      <div class="h">
-        <div class="num" style="--c1:#5AA8F2;--c2:#2A72C6"><svg viewBox="0 0 24 24" width="22" height="22" fill="#fff">
-            <path
-              d="M12 1c-4.97 0-9 4.03-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h4v1h-7v2h6c1.66 0 3-1.34 3-3V10c0-4.97-4.03-9-9-9z" />
-          </svg></div>
-        <div>
-          <h2>Level 0</h2><span>Blue Star Customer Care</span>
+    <!-- ══════════════════════════════════════════════
+       LANDING PAGE — EXACT ORDER:
+       1. Blue Star Header + Level 0 (Combined Section)
+       2. Pincode Search + Location Card
+    ══════════════════════════════════════════════ -->
+    <div id="landingView">
+      <!-- ─── CARD 1: BLUE STAR HEADER + LEVEL 0 CUSTOMER CARE ─── -->
+      <section class="glass-card header-l0-card">
+        <!-- Liquid Curved Header Banner -->
+        <div class="glass-header-shelf">
+          <div class="glass-logo-badge">
+            <img src="images.png" alt="Blue Star Built on Trust" class="brand-logo-img">
+          </div>
+          <h1 class="glass-main-title">Blue Star Escalation Matrix</h1>
+          <p class="glass-main-sub"> <br></p>
         </div>
-      </div>
-      <a class="line" href="tel:8976781177"><span class="act"><svg viewBox="0 0 24 24">
+
+        <!-- Level 0 Customer Care Heading -->
+        <div class="glass-l0-head">
+          <div class="glass-circle-btn l0-headset-btn">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h4v1h-7v2h6c1.66 0 3-1.34 3-3V10a9 9 0 0 0-9-9z"/>
+            </svg>
+          </div>
+          <div class="glass-l0-titles">
+            <h2>Level 0</h2>
+            <span>Blue Star Customer Care</span>
+          </div>
+        </div>
+
+        <!-- Level 0 Contact Capsules -->
+        <div class="glass-contact-list">
+          <!-- Toll Free -->
+          <a class="glass-pill-item" href="tel:8976781177" aria-label="Call Toll Free 89767 81177">
+            <span class="glass-circle-btn">
+              <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
+            </span>
+            <span class="glass-item-info">
+              <small>Toll Free</small>
+              <b>89767 81177</b>
+            </span>
+          </a>
+
+          <!-- WhatsApp -->
+          <a class="glass-pill-item" href="https://wa.me/918291001177" aria-label="WhatsApp 829 100 1177">
+            <span class="glass-circle-btn">
+              <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.2 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .2-3.3-.7-2.8-1.2-4.6-4-4.7-4.2-.1-.2-1.1-1.5-1.1-2.8s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.4.6-.3.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.6.3.1.2.1.8-.1 1.4z"/></svg>
+            </span>
+            <span class="glass-item-info">
+              <small>WHATSAPP</small>
+              <b>829 100 1177</b>
+            </span>
+          </a>
+
+          <!-- SMS -->
+          <a class="glass-pill-item" href="sms:57575?body=Service" aria-label="SMS Service to 57575">
+            <span class="glass-circle-btn">
+              <svg viewBox="0 0 24 24"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM7 9h10v2H7zm0-3h10v2H7zm0 6h7v2H7z"/></svg>
+            </span>
+            <span class="glass-item-info">
+              <small>SMS</small>
+              <b>‘Service’ to 57575</b>
+            </span>
+          </a>
+
+          <!-- E-Mail -->
+          <a class="glass-pill-item" href="mailto:customerservice@bluestarindia.com" aria-label="Email Customer Care">
+            <span class="glass-circle-btn">
+              <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/></svg>
+            </span>
+            <span class="glass-item-info">
+              <small>E-MAIL</small>
+              <b>customerservice@bluestarindia.com</b>
+            </span>
+          </a>
+
+          <!-- Web Site -->
+          <a class="glass-pill-item" href="https://www.bluestarindia.com" target="_blank" rel="noopener" aria-label="Visit Website">
+            <span class="glass-circle-btn">
+              <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+            </span>
+            <span class="glass-item-info">
+              <small>WEB SITE</small>
+              <b>www.bluestarindia.com</b>
+            </span>
+          </a>
+        </div>
+      </section>
+
+      <!-- ─── CARD 2: PINCODE SEARCH + LOCATION ─── -->
+      <section class="glass-card search-card">
+        <!-- Search Label -->
+        <label class="glass-search-lbl" for="pin">
+          <svg viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+          <span>ENTER PINCODE</span>
+        </label>
+
+        <!-- Recessed Inset Stadium Capsule Input -->
+        <div class="glass-input-well">
+          <input id="pin" type="text" inputmode="numeric" pattern="[0-9]*" maxlength="6" autocomplete="off" placeholder="000000" aria-describedby="hint">
+        </div>
+        <p id="hint" class="hint" role="status" aria-live="polite"></p>
+
+        <!-- Search & Reset Pill Buttons -->
+        <div class="glass-btn-row">
+          <button id="go" class="glass-btn-search" type="button">
+            <svg viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>
+            <span>Search</span>
+          </button>
+          <button id="reset" class="glass-btn-reset" type="button">
+            <svg viewBox="0 0 24 24"><path d="M12 5V2L7 6.5 12 11V8a5 5 0 1 1-5 5H5a7 7 0 1 0 7-8z"/></svg>
+            <span>Reset</span>
+          </button>
+        </div>
+
+        <!-- Inset Stadium Capsule Location -->
+        <div class="glass-loc-well">
+          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.5a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5z"/></svg>
+          <div>
+            <small>LOCATION</small>
+            <b id="loc">—</b>
+          </div>
+        </div>
+      </section>
+
+      <!-- Background Sparkle Decoration from Screenshot -->
+      <div class="front-sparkle" aria-hidden="true">✦</div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════
+       SEPARATE RESULTS PAGE — EXACT ORDER:
+       1. Back Button
+       2. Pincode + Location Card
+       3. Level 1 – Service Center / CRO
+       4. Level 2 – ESA Owner
+       5. Level 3 – SDE
+       6. Level 4 – BM
+    ══════════════════════════════════════════════ -->
+    <div id="resultsView" hidden>
+      <!-- 1. Back button -->
+      <button id="btnBack" class="btn-back" type="button" aria-label="Back to search">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z" />
+        </svg>
+        <span>Back</span>
+      </button>
+
+      <!-- 2. Pincode + Location -->
+      <section class="card rise" style="--i:0">
+        <div class="loc" style="margin-top:0">
+          <svg viewBox="0 0 24 24">
             <path
-              d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.400 11.400 0 0 0 3.600.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.500a1 1 0 0 1 1 1c0 1.250.2 2.450.57 3.600a1 1 0 0 1-.25 1z" />
-          </svg></span><span class="t"><small> Toll Free</small><b>89767 81177</b></span></a>
-      <a class="line" href="https://wa.me/918291001177"><span class="act"><svg viewBox="0 0 24 24">
-            <path
-              d="M12 2a10 10 0 0 0-8.600 15.100L2 22l5-1.300A10 10 0 1 0 12 2zm5.200 14.100c-.2.600-1.300 1.200-1.800 1.200-.5.100-1 .2-3.300-.7-2.800-1.200-4.600-4-4.700-4.200-.1-.2-1.100-1.500-1.100-2.800s.7-2 1-2.300c.2-.3.500-.3.700-.3h.5c.2 0 .4 0 .6.500l.9 2.100c.1.200.1.400 0 .5l-.4.600-.3.400c-.1.100-.3.300-.1.600.2.300.8 1.300 1.700 2.100 1.200 1 2.100 1.300 2.400 1.500.3.100.5.100.6-.1l.9-1.100c.2-.3.4-.2.600-.1l2 1c.3.100.5.200.6.300.1.200.1.800-.1 1.400z" />
-          </svg></span><span class="t"><small>WHATSAPP</small><b>829 100 1177</b></span></a>
-      <a class="line" href="sms:57575?body=Service"><span class="act"><svg viewBox="0 0 24 24">
-            <path
-              d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2zM7 9h10v2H7zm0-3h10v2H7zm0 6h7v2H7z" />
-          </svg></span><span class="t"><small>SMS</small><b>'Service' to 57575</b></span></a>
-      <a class="line" href="mailto:customerservice@bluestarindia.com"><span class="act"><svg viewBox="0 0 24 24">
-            <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z" />
-          </svg></span><span class="t"><small>E-MAIL</small><b
-            style="font-size:13px;letter-spacing:-.01em">customerservice@bluestarindia.com</b></span></a>
-      <a class="line" href="https://www.bluestarindia.com"><span class="act"><svg viewBox="0 0 24 24">
-            <path
-              d="M11.990 2C6.470 2 2 6.480 2 12s4.470 10 9.990 10C17.520 22 22 17.520 22 12S17.520 2 11.990 2zm6.930 6h-2.950a15.650 15.650 0 0 0-1.380-3.560A8.030 8.030 0 0 1 18.920 8zM12 4.040c.83 1.200 1.480 2.530 1.910 3.960h-3.820c.43-1.430 1.080-2.760 1.910-3.960zM4.260 14C4.100 13.360 4 12.690 4 12s.1-1.360.26-2h3.380c-.08.66-.14 1.320-.14 2 0 .68.06 1.340.14 2H4.260zm.82 2h2.950c.32 1.250.78 2.450 1.380 3.560A7.987 7.987 0 0 1 5.080 16zm2.950-8H5.080a7.987 7.987 0 0 1 4.330-3.560A15.650 15.650 0 0 0 8.030 8zM12 19.960c-.83-1.200-1.480-2.530-1.910-3.960h3.820c-.43 1.430-1.080 2.760-1.910 3.960zM14.340 14H9.660c-.1-.66-.16-1.320-.16-2 0-.68.06-1.350.16-2h4.680c.09.650.16 1.320.16 2 0 .68-.07 1.340-.16 2zm.25 5.560c.6-1.110 1.060-2.310 1.380-3.560h2.950a8.030 8.030 0 0 1-4.330 3.560zM16.360 14c.08-.66.14-1.320.14-2 0-.68-.06-1.340-.14-2h3.380c.16.640.26 1.310.26 2s-.1 1.360-.26 2h-3.380z" />
-          </svg></span><span class="t"><small>WEB SITE</small><b>www.bluestarindia.com</b></span></a>
-    </section>
+              d="M12 2a7 7 0 0 0-7 7c0 5.2 7 13 7 13s7-7.8 7-13a7 7 0 0 0-7-7zm0 9.500A2.500 2.500 0 1 1 12 6.500a2.500 2.500 0 0 1 0 5z" />
+          </svg>
+          <div>
+            <small>PINCODE: <span id="resPin" style="font-size:16px;font-weight:800;color:var(--blue-dk)">—</span></small>
+            <b id="resLoc" style="font-size:17px;display:block;margin-top:2px">—</b>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3 to 6. Levels 1 to 4 Details -->
+      <div id="levels"></div>
+    </div>
 
     <section id="empty" class="card empty rise" style="--i:3">
       <div class="bub"><svg viewBox="0 0 24 24">
@@ -1602,20 +2275,93 @@
           .catch(function (e) { callback(e); });
       }
 
-      function call(label, phone) {
-        phone = String(phone || "").trim();
-        if (!phone) return "";
-        return '<a class="call" href="tel:' + esc(phone.replace(/[^\d+]/g, "")) + '" aria-label="Call ' + esc(label) + " " + esc(phone) + '">' +
-          '<span class="t"><small>' + esc(label) + "</small><b>" + esc(phone) + '</b></span><span class="ic">' + PHONE + "</span></a>";
+      var EMAIL_MAP = {
+        "Nirdeva Kumar G": "nirdevakumarg@bluestarindia.com",
+        "Shabeer Ahamed": "shabeera@bluestarindia.com",
+        "Selvamurugan": "selvamurugang@bluestarindia.com",
+        "Tharrun": "tharruns@bluestarindia.com"
+      };
+
+      /* Split comma/semicolon-separated values, trim, filter empty and deduplicate */
+      function splitList(val) {
+        if (val == null) return [];
+        var s = String(val).trim();
+        if (!s) return [];
+        var parts = s.split(/[,;\n\r]+/);
+        var out = [];
+        var seen = {};
+        for (var i = 0; i < parts.length; i++) {
+          var item = parts[i].trim();
+          if (item) {
+            var key = item.toLowerCase();
+            if (!seen[key]) {
+              seen[key] = true;
+              out.push(item);
+            }
+          }
+        }
+        return out;
       }
 
-      function emailRow(email) {
-        email = String(email || "").trim();
-        if (!email) return "";
-        return '<a class="line" href="mailto:' + esc(email) + '" style="margin-top:10px">' +
-          '<span class="act" style="background:linear-gradient(145deg,#5AA8F2,#2A72C6)">' + EMAIL_ICON + '</span>' +
-          '<span class="t"><small>E-MAIL</small><b style="font-size:13px;letter-spacing:-.01em">' + esc(email) + '</b></span></a>';
+      function resolveEmails(enteredEmail, personName) {
+        var list = splitList(enteredEmail);
+        if (list.length === 0 && personName) {
+          var raw = String(personName).trim().replace(/^(mr|mrs|ms|miss|dr)\.?\s+/i, "");
+          if (EMAIL_MAP[raw]) {
+            list = [EMAIL_MAP[raw]];
+          }
+        }
+        return list;
       }
+
+      /* Renders independent dial buttons for primary and all alternate mobile numbers */
+      function phoneSection(phonesRaw, defaultLabel) {
+        var list = splitList(phonesRaw);
+        if (!list.length) return "";
+        var html = '<div class="contact-sec phone-sec">';
+        for (var i = 0; i < list.length; i++) {
+          var phone = list[i];
+          var isPrimary = (i === 0);
+          var label;
+          if (list.length === 1) {
+            label = defaultLabel || "PRIMARY NUMBER";
+          } else if (i === 0) {
+            label = (defaultLabel && defaultLabel !== "MOBILE" ? defaultLabel + " (PRIMARY)" : "PRIMARY NUMBER");
+          } else {
+            label = "ALTERNATE NUMBER " + i;
+          }
+          var cleanTel = phone.replace(/[^\d+]/g, "");
+          var cls = isPrimary ? "call" : "call alt";
+          html += '<a class="' + cls + '" href="tel:' + esc(cleanTel) + '" aria-label="Call ' + esc(label) + " " + esc(phone) + '">' +
+            '<span class="t"><small>' + esc(label) + '</small><b>' + esc(phone) + '</b></span>' +
+            '<span class="ic">' + PHONE + '</span></a>';
+        }
+        html += '</div>';
+        return html;
+      }
+
+      /* Renders independent mailto buttons for primary and all alternate email addresses */
+      function emailSection(emailsOrRaw) {
+        var list = Array.isArray(emailsOrRaw) ? emailsOrRaw : splitList(emailsOrRaw);
+        if (!list.length) return "";
+        var html = '<div class="contact-sec email-sec">';
+        for (var i = 0; i < list.length; i++) {
+          var email = list[i];
+          var isPrimary = (i === 0);
+          var label = (list.length === 1)
+            ? "PRIMARY EMAIL"
+            : (i === 0 ? "PRIMARY EMAIL" : "ALTERNATE EMAIL " + i);
+          var cls = isPrimary ? "email-btn" : "email-btn alt";
+          html += '<a class="' + cls + '" href="mailto:' + esc(email) + '" aria-label="Email ' + esc(label) + " " + esc(email) + '">' +
+            '<span class="t"><small>' + esc(label) + '</small><b>' + esc(email) + '</b></span>' +
+            '<span class="ic">' + EMAIL_ICON + '</span></a>';
+        }
+        html += '</div>';
+        return html;
+      }
+
+      function call(label, phone) { return phoneSection(phone, label); }
+      function emailRow(email) { return emailSection(email); }
 
       function who(role, name, chip) {
         name = String(name || "").trim();
@@ -1626,10 +2372,46 @@
         return '<section class="card rise l' + n + '" style="--i:' + i + '"><div class="h"><div class="num">' + n + "</div><div><h2>" + title + "</h2><span>" + sub + "</span></div></div>" + body + "</section>";
       }
 
+      var landingView = $("landingView"), resultsView = $("resultsView");
+      var resPin = $("resPin"), resLoc = $("resLoc"), btnBack = $("btnBack");
+      var btnGo = $("go");
+
+      function showLanding() {
+        if (landingView) landingView.hidden = false;
+        if (resultsView) resultsView.hidden = true;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      function showResults(pin, loc) {
+        if (landingView) landingView.hidden = true;
+        if (resultsView) resultsView.hidden = false;
+        if (resPin) resPin.textContent = pin;
+        if (resLoc) resLoc.textContent = loc || "—";
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+
+      if (btnBack) {
+        btnBack.addEventListener("click", function () {
+          showLanding();
+          if (pinEl) pinEl.focus();
+        });
+      }
+
+      function setGoLoading(loading) {
+        if (!btnGo) return;
+        if (loading) {
+          btnGo.disabled = true;
+          btnGo.innerHTML = '<span class="spinner" style="border-top-color:#fff;display:inline-block;width:14px;height:14px;border-width:2px;margin-right:4px"></span> Searching…';
+        } else {
+          btnGo.disabled = false;
+          btnGo.innerHTML = '<svg viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 1 0 14 15.5l.3.3v.8l5 5 1.5-1.5-5-5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9z"/></svg>Search';
+        }
+      }
+
       function picker(idx) {
         if (currentRecs.length < 2) return "";
         var b = currentRecs.map(function (r, i) {
-          return '<button type="button" class="btn ' + (i === idx ? "pri" : "sec") + '" data-i="' + i + '" style="flex:1 1 auto;height:auto;min-height:40px;padding:8px 12px">' + esc(r.esaName || r.esaCode || ("Option " + (i + 1))) + "</button>";
+          return '<button type="button" class="btn ' + (i === idx ? "pri" : "sec") + '" data-i="' + i + '" style="flex:1 1 auto;height:auto;min-height:40px;padding:8px 12px">' + esc(r.esaName || ("Option " + (i + 1))) + "</button>";
         }).join("");
         return '<section class="card rise" style="--i:0"><div class="who"><small>' + currentRecs.length + ' service centers serve this pincode</small></div><div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:10px">' + b + "</div></section>";
       }
@@ -1637,10 +2419,25 @@
       function render(idx) {
         var rec = currentRecs[idx];
         levelsEl.innerHTML = picker(idx) +
-          level(1, "LEVEL 1", "Service Center &amp; CRO", who("Authorised Service Center", rec.esaName) + who("ESA Code", rec.esaCode) + call("CRO CONTACT", rec.croPhone), 0) +
-          level(2, "LEVEL 2", "ESA owner", who("Name", mrName(rec.owner)) + call("MOBILE", rec.ownerPhone) + emailRow(rec.ownerEmail), 1) +
-          level(3, "LEVEL 3", "Service delivery engineer", who("Name", mrName(rec.sde)) + call("MOBILE", rec.sdePhone) + emailRow(rec.sdeEmail), 2) +
-          level(4, "LEVEL 4", "Branch manager", who("Name", mrName(rec.bm)) + call("MOBILE", rec.bmPhone) + emailRow(rec.bmEmail), 3);
+          level(1, "LEVEL 1", "Service Center &amp; CRO",
+            who("Expert Service Associate", rec.esaName) +
+            phoneSection(rec.croPhone, "CRO CONTACT"),
+            0) +
+          level(2, "LEVEL 2", "ESA owner",
+            who("Name", mrName(rec.owner)) +
+            phoneSection(rec.ownerPhone, "MD CONTACT") +
+            emailSection(resolveEmails(rec.ownerEmail, rec.owner)),
+            1) +
+          level(3, "LEVEL 3", "Service delivery engineer",
+            who("Name", mrName(rec.sde)) +
+            phoneSection(rec.sdePhone, "SDE CONTACT") +
+            emailSection(resolveEmails(rec.sdeEmail, rec.sde)),
+            2) +
+          level(4, "LEVEL 4", "Branch manager",
+            who("Name", mrName(rec.bm)) +
+            phoneSection(rec.bmPhone, "BM CONTACT") +
+            emailSection(resolveEmails(rec.bmEmail, rec.bm)),
+            3);
         levelsEl.hidden = false; emptyEl.hidden = true;
       }
 
@@ -1660,31 +2457,57 @@
         var v = pinEl.value.replace(/\D/g, "");
         if (pinEl.value !== v) pinEl.value = v;
         setHint("");
-        if (!v.length) { clearResults(); if (explicit) setHint("Please enter a pincode."); return; }
-        if (v.length < 6) { clearResults(); if (explicit) setHint("Pincode must be 6 digits."); return; }
 
+        if (!v.length) {
+          clearResults();
+          if (explicit) setHint("Please enter a 6-digit pincode.");
+          return;
+        }
+
+        // Live location preview on landing page when 6 digits are typed
+        if (v.length === 6 && !explicit) {
+          fetchAreaName(v, mySeq);
+          return;
+        }
+
+        if (v.length < 6) {
+          clearResults();
+          if (explicit) setHint("Pincode must be 6 digits.");
+          return;
+        }
+
+        // Explicit search triggered (via Search button or Enter key)
+        setGoLoading(true);
         locEl.textContent = "Searching…"; locEl.className = "";
 
         lookupLive(v, function (err, recs) {
+          setGoLoading(false);
           if (mySeq !== seq) return; // a newer search replaced this one
+
           if (err) {
-            clearResults("Unable to load escalation data right now. Please check your internet connection and try again.");
-            locEl.textContent = "Unable to load"; locEl.className = "err"; setHint("Network or server error");
+            clearResults("Unable to load escalation data right now. Please check your internet connection.");
+            locEl.textContent = "Unable to load"; locEl.className = "err"; setHint("Network or server connection error.");
             return;
           }
-          if (!recs.length) {
-            clearResults("This pincode is not in the Coimbatore branch mapping. Please check and try again.");
-            locEl.textContent = "Pincode Not Found"; locEl.className = "err"; setHint("Pincode Not Found");
+
+          if (!recs || !recs.length) {
+            clearResults("This pincode is not in the Coimbatore Branch Mapping.");
+            locEl.textContent = "Pincode Not Found"; locEl.className = "err"; setHint("Pincode Not Found in Coimbatore branch.");
             return;
           }
+
           currentRecs = recs;
-          locEl.textContent = recs[0].location || "—"; locEl.className = "";
+          var initLoc = recs[0].location || "Coimbatore";
+          locEl.textContent = initLoc; locEl.className = "";
+
+          // Switch to separate results view
+          showResults(v, initLoc);
           render(0);
-          fetchAreaName(v, mySeq);   // existing location lookup (unchanged)
+          fetchAreaName(v, mySeq);
         });
       }
 
-      /* Existing automatic location lookup — unchanged */
+      /* Automatic location lookup — updates both landing & results location displays */
       function fetchAreaName(pin, mySeq) {
         try {
           fetch("https://api.postalpincode.in/pincode/" + pin)
@@ -1693,19 +2516,29 @@
               if (mySeq !== seq) return;
               if (data && data[0] && data[0].Status === "Success" && data[0].PostOffice && data[0].PostOffice.length) {
                 var po = data[0].PostOffice[0];
-                locEl.textContent = po.Name + ", " + po.District;
+                var areaStr = po.Name + ", " + po.District;
+                if (locEl) locEl.textContent = areaStr;
+                if (resLoc) resLoc.textContent = areaStr;
               }
             })
             .catch(function () { });
         } catch (e) { }
       }
-      function reset() { seq++; pinEl.value = ""; setHint(""); clearResults(); pinEl.focus(); }
+
+      function reset() {
+        seq++;
+        pinEl.value = "";
+        setHint("");
+        clearResults();
+        showLanding();
+        pinEl.focus();
+      }
 
       pinEl.addEventListener("input", function () { search(false); });
       pinEl.addEventListener("keydown", function (e) { if (e.key === "Enter") { search(true); pinEl.blur(); } });
       document.getElementById("go").addEventListener("click", function () { search(true); });
       document.getElementById("reset").addEventListener("click", reset);
-      window.EscalationApp = { search: search, reset: reset };
+      window.EscalationApp = { search: search, reset: reset, showLanding: showLanding, showResults: showResults };
     })();
 
     /* ═══════════════════════════════════════════════════════════════
@@ -1752,7 +2585,17 @@
           body: JSON.stringify(body)
         }).then(function (r) { return r.json(); })
           .then(callback)
-          .catch(function (e) { callback({ ok: false, error: "Network error: " + String(e) }); });
+          .catch(function (e) {
+            // Fallback for login via GET if local file:/// or browser blocks POST redirect
+            if (body && body.action === "login") {
+              fetch(API_URL + "?action=login&password=" + encodeURIComponent(body.password))
+                .then(function (r) { return r.json(); })
+                .then(callback)
+                .catch(function (err) { callback({ ok: false, error: "Login failed: " + String(err) }); });
+              return;
+            }
+            callback({ ok: false, error: "Network error: " + String(e) });
+          });
       }
 
       // ── Overlay open/close ────────────────────────────────

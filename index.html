@@ -514,10 +514,10 @@
       font-size: 14px;
       font-weight: 700;
       color: var(--blue-dk);
-      letter-spacing: -.01em;
+      letter-spacing: -.02em;
       line-height: 1.25;
-      word-break: break-all;
-      overflow-wrap: anywhere;
+      word-break: normal;
+      overflow-wrap: break-word;
     }
 
     .email-btn .ic {
@@ -707,8 +707,17 @@
         font-size: 18px
       }
 
+      .email-btn {
+        padding: 8px 10px 8px 14px;
+        gap: 10px;
+      }
+
       .email-btn b {
-        font-size: 12.5px
+        font-size: clamp(10.5px, 3.2vw, 12.5px);
+        letter-spacing: -0.02em;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
       }
 
       .card {
@@ -728,8 +737,11 @@
 
     /* ═══════════════════════════════════════════════
    ADMIN BUTTON (small, bottom-right corner)
+   NOTE: Hidden in UI per user request. To unhide/show
+   the admin button, remove "display: none;" below or change to "display: flex;".
 ═══════════════════════════════════════════════ */
     #adminTriggerBtn {
+      display: none; /* UI HIDDEN: Remove this line or set to display:flex to show admin button */
       position: fixed;
       bottom: 18px;
       right: 18px;
@@ -741,7 +753,6 @@
       cursor: pointer;
       background: linear-gradient(145deg, #4EA0F0, #2269BE);
       box-shadow: 4px 5px 12px rgba(36, 104, 186, .5), -3px -3px 8px rgba(255, 255, 255, .8);
-      display: flex;
       align-items: center;
       justify-content: center;
       transition: transform .18s, box-shadow .18s;
@@ -1651,12 +1662,20 @@
 
     .glass-item-info b {
       display: block;
-      font-size: 16px;
+      font-size: 15.5px;
       font-weight: 800;
       color: #102A54;
-      letter-spacing: .01em;
+      letter-spacing: -.01em;
       line-height: 1.25;
-      overflow-wrap: anywhere;
+      word-break: normal;
+      overflow-wrap: normal;
+    }
+
+    /* Email address in pills: scale smoothly without letter wrapping */
+    .glass-pill-item[href^="mailto:"] .glass-item-info b {
+      font-size: clamp(11.5px, 3.3vw, 14.5px);
+      letter-spacing: -0.025em;
+      white-space: nowrap;
     }
 
     /* CARD 2: Pincode Search + Location Card */
@@ -1847,21 +1866,55 @@
 
     @media (max-width: 480px) {
       .glass-card {
-        border-radius: 32px;
+        border-radius: 30px;
       }
       .glass-header-shelf {
         border-radius: 0 0 46% 46% / 0 0 22px 22px;
-        padding: 20px 16px 18px;
+        padding: 18px 14px 16px;
       }
       .glass-main-title {
-        font-size: 18.5px;
+        font-size: 18px;
+      }
+      .glass-contact-list {
+        padding: 0 12px 18px;
+      }
+      .glass-pill-item {
+        padding: 7px 12px;
+        gap: 10px;
+        min-height: 52px;
+        margin-top: 8px;
+      }
+      .glass-circle-btn {
+        width: 38px;
+        height: 38px;
+      }
+      .glass-circle-btn svg {
+        width: 19px;
+        height: 19px;
+      }
+      .glass-item-info small {
+        font-size: 10px;
+      }
+      .glass-item-info b {
+        font-size: 13.5px;
+      }
+      .glass-pill-item[href^="mailto:"] .glass-item-info b {
+        font-size: clamp(10.5px, 3.2vw, 13px);
+        letter-spacing: -0.025em;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        overflow: hidden;
+      }
+      .glass-pill-item[href^="http"] .glass-item-info b {
+        font-size: 13px;
+        white-space: nowrap;
       }
       .glass-input-well input {
-        font-size: 25px;
-        letter-spacing: 0.22em;
+        font-size: 24px;
+        letter-spacing: 0.18em;
       }
       .glass-btn-search, .glass-btn-reset {
-        font-size: 15px;
+        font-size: 14.5px;
       }
     }
   </style>
@@ -1888,13 +1941,13 @@
 
         <!-- Level 0 Customer Care Heading -->
         <div class="glass-l0-head">
-          <div class="glass-circle-btn l0-headset-btn">
+          <!-- <div class="glass-circle-btn l0-headset-btn">
             <svg viewBox="0 0 24 24">
               <path d="M12 1a9 9 0 0 0-9 9v7c0 1.66 1.34 3 3 3h3v-8H5v-2c0-3.87 3.13-7 7-7s7 3.13 7 7v2h-4v8h4v1h-7v2h6c1.66 0 3-1.34 3-3V10a9 9 0 0 0-9-9z"/>
             </svg>
-          </div>
+          </div> -->
           <div class="glass-l0-titles">
-            <h2>Level 0</h2>
+            <h2></h2>
             <span>Blue Star Customer Care</span>
           </div>
         </div>
@@ -1907,7 +1960,7 @@
               <svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.6a1 1 0 0 1-.25 1z"/></svg>
             </span>
             <span class="glass-item-info">
-              <small>Toll Free</small>
+              <small>Toll </small>
               <b>89767 81177</b>
             </span>
           </a>
